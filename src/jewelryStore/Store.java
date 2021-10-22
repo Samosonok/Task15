@@ -2,6 +2,7 @@ package jewelryStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Samosonok Liliia
@@ -11,8 +12,9 @@ import java.util.List;
 class Store {
 
     List<Client> jewelryStore = new ArrayList<>();
-    Client client = new Client(TimeGenerator.getEntryTime(), TimeGenerator.getExitTime());
+    Client client = new Client();
     boolean suspendFlag;
+    ThreadLocalRandom random = ThreadLocalRandom.current();
 
     public void addClient() {
         try {
@@ -21,7 +23,7 @@ class Store {
                 System.out.println("\nClient went to the store");
                 System.out.println("Number of clients in the store: " + jewelryStore.size());
             }
-            Thread.sleep(TimeGenerator.getEntryTime());
+            Thread.sleep(random.nextLong(2_000, 5_000));
             synchronized (this) {
                 while (suspendFlag) {
                     wait();
@@ -34,7 +36,7 @@ class Store {
 
     public void removeClient() {
         try {
-            Thread.sleep(TimeGenerator.getExitTime());
+            Thread.sleep(random.nextLong(1_000, 8_000));
             if (!jewelryStore.isEmpty()) {
                 jewelryStore.remove(0);
                 System.out.println("\nClient left the store");

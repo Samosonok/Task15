@@ -7,11 +7,6 @@ package jewelryStore;
 
 public class Client {
 
-    int entryTime;
-    int exitTime;
-
-    public Client(int entryTime, int exitTime) {
-        this.entryTime = entryTime;
-        this.exitTime = exitTime;
+    public Client() {
     }
 }
